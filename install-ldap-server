@@ -49,6 +49,6 @@ cd /usr/share/migrationtools/; ./migrate_passwd.pl /etc/passwd > passwd.ldif | t
 ./migrate_group.pl /etc/group > group.ldif | tee -a LDAP-Install.log; slapadd -v -l rgroup.ldif | tee -a LDAP-Install.log; chown -R ldap.ldap /var/lib/ldap | tee -a LDAP-Install.log; systemctl start slapd | tee -a LDAP-Install.log; cd ~
 
 #Adding the diradm utility, also installs wget in case it was not already
-yum install -y wget bz2 tar| tee -a LDAP-Install.log; wget http://www.hits.at/diradm/diradm-1.3.tar.gz | tee -a LDAP-Install.log; tar zxvf diradm-1.3.tar.gz | tee -a LDAP-Install.log; cp diradm-1.3/diradm.conf /etc/ | tee -a LDAP-Install.log
+yum install -y wget bzip2 tar| tee -a LDAP-Install.log; wget http://www.hits.at/diradm/diradm-1.3.tar.gz | tee -a LDAP-Install.log; tar zxvf diradm-1.3.tar.gz | tee -a LDAP-Install.log; cp diradm-1.3/diradm.conf /etc/ | tee -a LDAP-Install.log
 
 echo "Finished setup" | tee -a NFS-Install.log
