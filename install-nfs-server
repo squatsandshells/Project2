@@ -24,7 +24,7 @@ partprobe /dev/sda | tee -a NFS-Install.log
 mkfs.xfs /dev/sda4 | tee -a NFS-Install.log; xfs_repair /dev/sda4 | tee -a NFS-Install.log; mount /dev/sda4 /home | tee -a NFS-Install.log
 
 #Editing fstab file
-echo "/dev/sda4/ home xfs defaults 0 0" >> /etc/fstab | tee -a NFS-Install.log
+echo "/dev/sda4/ /home xfs defaults 0 0" >> /etc/fstab | tee -a NFS-Install.log
 
 #Editing exports file
 echo "/home 10.2.6.0/23(rw,sync,root_squash)" >> /etc/exports | tee -a NFS-Install.log; exportfs -a | tee -a NFS-Install.log
