@@ -1,0 +1,7 @@
+MANIFEST.txt Author: Noah Dees, CIT470-001, Darci Guriel, Group 1, NFS and LDAP server manifest
+
+compuone-ks.cfg - Kickstart file for the clients that enables ldap and nfs as soon as the computer is kickstarted.
+install-nfs-server - A bash script that is meant to be ran in order to set the server up to have an nfs connection in /home.
+install-ldap-server - A bash script that is meant to be ran in order to set the server up with a fresh ldap install and prepares it to connect to IPs in the 10.2.6.*/23 subnet.
+Compu-One Solutions Powerpoint - A powerpoint that describes what the goal of this vendor's presentation is.
+Compu-One Solutions Paper - An educational paper meant to inform the user about the project and how to use it.
