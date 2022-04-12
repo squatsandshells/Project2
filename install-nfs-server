@@ -1,0 +1,39 @@
+
+#Provides help via -h or --help command line options
+if ["$1" == "-h"] || ["$1" == "-help"]; then echo "To use this script type ./install-ldap-server ,this script will install LDAP and add authentication." ; exit 0 ; fi
+
+#Installing NFS
+echo "Installing NFS" | tee -a NFS-Install.log
+yum install -y nfs-utils | tee -a NFS-Install.log
+echo "Installation Complete" | tee -a NFS-Install.log
+
+#Starting services
+systemctl start rpcbind nfs-server | tee -a NFS-Install.log; systemctl enable rpcbind nfs-server | tee -a NFS-Install.log
+
+#Creates the primary partition, blank lines are needed to press enter
+fdisk /dev/sda <<EOF
+n
+p
+
+
+w
+EOF
+partprobe /dev/sda | tee -a NFS-Install.log
+
+#Formatting partition to ext3 and mounting
+mkfs.xfs /dev/sda4 | tee -a NFS-Install.log; xfs_repair /dev/sda4 | tee -a NFS-Install.log; mount /dev/sda4 /home | tee -a NFS-Install.log
+
+#Editing fstab file
+echo "/dev/sda4/ home xfs defaults 0 0" >> /etc/fstab | tee -a NFS-Install.log
+
+#Editing exports file
+echo "/home 10.2.6.0/24(rw,sync,root_squash)" >> /etc/exports | tee -a NFS-Install.log; exportfs -v | tee -a NFS-Install.log
+
+#Configuring the firewall
+firewall-cmd --zone=public --add-port=2049/tcp --permanent | tee -a NFS-Install.log; firewall-cmd --zone=public --add-port=111/tcp --permanent | tee -a NFS-Install.log; firewall-cmd --zone=public --add-port=20048/tcp --permanent | tee -a NFS-Install.log
+
+firewall-cmd --zone=public --add-port=2049/udp --permanent | tee -a NFS-Install.log; firewall-cmd --zone=public --add-port=111/udp --permanent | tee -a NFS-Install.log; firewall-cmd --zone=public --add-port=20048/udp --permanent | tee -a NFS-Install.log
+
+firewall-cmd --reload | tee -a NFS-Install.log
+
+echo "Finished setup" | tee -a NFS-Install.log
