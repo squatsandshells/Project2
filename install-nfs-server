@@ -1,6 +1,7 @@
 
 #Provides help via -h or --help command line options
-if ["$1" == "-h"] || ["$1" == "-help"]; then echo "To use this script type \.\/install-ldap-server ,this script will install LDAP and add authentication." ; exit 0 ; fi
+if [ "$1" == "-h" ]; then echo "To use this script type .install-nfs-server ,this script will install NFS." ; exit 0 ; fi
+if [ "$1" == "-help" ]; then echo "To use this script type .install-nfs-server ,this script will install NFS." ; exit 0 ; fi
 
 #Installing NFS
 echo "Installing NFS" | tee -a NFS-Install.log
