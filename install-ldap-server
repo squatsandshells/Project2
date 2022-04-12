@@ -1,6 +1,6 @@
 #Provides help via -h or --help command line options
-if [ "$1" == "-h" ]; then echo "To use this script type .install-nfs-server ,this script will install NFS." ; exit 0 ; fi
-if [ "$1" == "-help" ]; then echo "To use this script type .install-nfs-server ,this script will install NFS." ; exit 0 ; fi
+if [ "$1" == "-h" ]; then echo "To use this script type ./install-ldap-server ,this script will install LDAP and add authentication." ; exit 0 ; fi
+if [ "$1" == "-help" ]; then echo "To use this script type ./install-ldap-server ,this script will install LDAP and add authentication." ; exit 0 ; fi
 
 #Installing LDAP
 echo "Installing OpenLDAP" | tee -a LDAP-Install.log; yum install -y openldap-clients openldap-servers | tee -a LDAP-Install.log; echo "Installation Finished" | tee -a LDAP-Install.log
